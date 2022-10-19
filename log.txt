@@ -1,0 +1,8 @@
+2022-10-17
+* Major reformatting. 
+  * Spilt into raw, processed, and output folders. 
+    * Raw may have multiple initial sources and are not changed from source (favor RDS format). 
+    * Processed can be intermediate outputs (e.g, formatting column labels, simplifications)
+    * Output will have a single reference by country and admin level
+  * Created log file for recording changes/updates.
+  * Created metadata.csv for recording metadata on Output files, include source and notes on processing.
