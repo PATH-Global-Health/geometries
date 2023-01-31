@@ -121,6 +121,23 @@ dir_create(dir, cty)
 st_write(adm2, path(dir, cty, "adm2.shp"), driver = "ESRI Shapefile")
 st_write(adm2, path(dir, cty, "adm2.json"), driver = "GeoJSON")
 saveRDS(adm2, path(dir, cty, "adm2.rds"))
+# Cape Verde --------------------------------
+# Admin2: 58
+# Source: HDX
+cty <- "Cape Verde"
+
+# Read in
+adm2 <- st_read(path("raw/justin-box/adm2", cty, "adm2.shp")) |> 
+  # adm2 <- st_read("raw/HDX/adm2/Botswana/bwa_admbnda_adm2_2011.shp") |>
+  #   select(ADM0 = ADM0_EN, ADM1 = ADM1_EN, ADM2 = ADM2_EN) |> 
+  mutate_if(is_character, fix_accents)
+plot(adm2)
+
+# Output
+dir_create(dir, cty)
+st_write(adm2, path(dir, cty, "adm2.shp"), driver = "ESRI Shapefile")
+st_write(adm2, path(dir, cty, "adm2.json"), driver = "GeoJSON")
+saveRDS(adm2, path(dir, cty, "adm2.rds"))
 # Central African Republic --------------------------------
 # Admin2: 71
 # Source: MAP (72)
@@ -907,6 +924,31 @@ cty <- "Swaziland"
 # adm2 <- st_read(path("raw/justin-box/adm2", cty, "adm2.shp")) |>
   adm2 <- st_read("raw/HDX/adm2/Swaziland/swz_admbnda_adm2_CSO_2007.shp") |>
   select(ADM0 = ADM0_EN, ADM1 = ADM1_EN, ADM2 = ADM2_EN) |>
+  mutate_if(is_character, fix_accents)
+plot(adm2)
+adm2
+
+adm2 |> 
+  st_drop_geometry() |> 
+  as_tibble() |> 
+  add_count(ADM2, sort = T) |>
+  arrange(desc(n))
+
+# Output
+dir_create(dir, cty)
+st_write(adm2, path(dir, cty, "adm2.shp"), driver = "ESRI Shapefile")
+st_write(adm2, path(dir, cty, "adm2.json"), driver = "GeoJSON")
+saveRDS(adm2, path(dir, cty, "adm2.rds"))
+
+# Tanzania  --------------------------------
+# Admin2: 30
+# Source: HDX (40)
+cty <- "Tanzania"
+
+#1 Read in
+adm2 <- st_read(path("raw/justin-box/adm2", cty, "adm2.shp")) |>
+  # adm2 <- st_read("raw/HDX/adm2/Morocco/mar_admbnda_adm2_unhcr_20201203.shp") |>
+  # select(ADM0 = ADM0_EN, ADM1 = ADM1_EN, ADM2 = ADM2_EN) |>
   mutate_if(is_character, fix_accents)
 plot(adm2)
 adm2
